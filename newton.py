@@ -10,3 +10,9 @@ def second_derivative(func, x):
 
 epsilon = 1e-5
 second_derivative(f, 2)
+
+x = x_0 + 1
+
+while abs(x - x_0) > 10e-5:
+    x = x0
+    x = x0 - f_x / f_xx
