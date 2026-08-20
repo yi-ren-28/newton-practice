@@ -1,6 +1,6 @@
 import numpy as np
 
-def newton_method(grad, hessian, x0, tol=1e-6, max_iter=100):
+def multi_newton_method(grad, hessian, x0, tol=1e-6, max_iter=100):
     x = np.array(x0, dtype=float)
 
     for i in range(max_iter):
