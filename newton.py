@@ -1,26 +1,20 @@
 
     
-def first_derivative(func, x, epsilon = 0.0001):
+def first_derivative(func, x, epsilon = 1e-5):
     """Define the first derivative of function f(x)"""
-    f_x = (f(x + epsilon) - f(x)) / epsilon
-    return f_x
+    return (f(x + epsilon) - f(x)) / epsilon
 
-def second_derivative(func, x, epsilon = 0.0001):
-    """call the first derivative twice"""
-    f_xx = (first_derivative(func, x + epsilon) - first_derivative(func, x) )/ epsilon
-    return f_xx
+def second_derivative(func, x, epsilon = 1e-5):
+    """Call the first derivative twice"""
+    return (first_derivative(func, x + epsilon) - first_derivative(func, x) )/ epsilon
 
-def newton_func(func, x0):
+
+def optimize(x0, func, tal = 1e-4):
+    x_new = x0 - first_derivative(func, x0) / second_derivative(func, x0)
     x = x0
-    i = 0
-    while abs(first_derivative(func, x, epsilon = 0.0001)) > 10e-5:
-        x = x - first_derivative(func, x, epsilon = 0.0001) / second_derivative(func, x, epsilon = 0.0001)
-        i = i + 1
-    return x
+    while abs(first_derivative(func, x0)) > tal:
+        x = x_new
+        x_new = x0 - first_derivative(func, x) / second_derivative(func, x)
+    return {"x": x_new, 
+           'value': f(x_new)}
 
-def f(x):
-    """Define the orginal function"""
-    return (x + 3)**2
-    
-result = newton_func(f, 0)
-print(result)
